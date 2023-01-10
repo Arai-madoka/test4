@@ -69,29 +69,41 @@
 				group = new THREE.Group();
 				scene.add( group );
 
-				let g=new THREE.MeshBasicMaterial({color:0xc0c0c0});
-				for(let i=0;i<6;i++){
-					for(let j=1;j<2;j+=0.2){
-						let grid1 =new THREE.GridHelper(1,5,g,g);
-						grid1.name='grid1';
-						grid1.myid=i;
-						grid1.rotation.x=0;
-						grid1.position.y=j;
-						grid1.position.z=0;
-						group.add(grid1);	
-					}	
+				const geometries = [
+					new THREE.BoxGeometry( 0.2, 0.2, 0.2 ),
+					new THREE.ConeGeometry( 0.2, 0.2, 64 ),
+					new THREE.CylinderGeometry( 0.2, 0.2, 0.2, 64 ),
+					new THREE.IcosahedronGeometry( 0.2, 8 ),
+					new THREE.TorusGeometry( 0.2, 0.04, 64, 32 )
+				];
+
+				for ( let i = 0; i < 50; i ++ ) {
+
+					const geometry = geometries[ Math.floor( Math.random() * geometries.length ) ];
+					const material = new THREE.MeshStandardMaterial( {
+						color: Math.random() * 0xffffff,
+						roughness: 0.7,
+						metalness: 0.0
+					} );
+
+					const object = new THREE.Mesh( geometry, material );
+
+					object.position.x = Math.random() * 4 - 2;
+					object.position.y = Math.random() * 2;
+					object.position.z = Math.random() * 4 - 2;
+
+					object.rotation.x = Math.random() * 2 * Math.PI;
+					object.rotation.y = Math.random() * 2 * Math.PI;
+					object.rotation.z = Math.random() * 2 * Math.PI;
+
+					object.scale.setScalar( Math.random() + 0.5 );
+
+					object.castShadow = true;
+					object.receiveShadow = true;
+
+					group.add( object );
+
 				}
-				for(let k=0;k<6;k++){
-					for(let n=-0.5;n<0.7;n+=0.2){
-						let grid2 =new THREE.GridHelper(1,5,g,g);
-						grid2.name='grid2';
-						grid2.myid=k;
-						grid2.rotation.x=Math.PI/2;
-						grid2.position.y=1.5;
-						grid2.position.z=n;
-						group.add(grid2);	
-					}				
-				}	
 
 				//
 
