@@ -106,6 +106,30 @@
 				}
 
 				//
+				
+				let g=new THREE.MeshBasicMaterial({color:0xc0c0c0});
+				let size=1.0;
+				let step=5.0;
+				for(let i=0;i<6;i++){
+					for(let j=1;j<2;j+=0.2){
+						let grid1 =new THREE.GridHelper(size,step,g,g);
+						grid1.myid=i;
+						grid1.rotation.x=0;
+						grid1.position.y=j;
+						grid1.position.z=0;
+						scene.add(grid1);	
+					}	
+				}
+				for(let k=0;k<6;k++){
+					for(let n=-0.5;n<0.7;n+=0.2){
+						let grid2 =new THREE.GridHelper(size,step,g,g);
+						grid2.myid=k;
+						grid2.rotation.x=Math.PI/2;
+						grid2.position.y=1.5;
+						grid2.position.z=n;
+						scene.add(grid2);	
+					}				
+				}	
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
